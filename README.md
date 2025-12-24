@@ -127,5 +127,4 @@ Deploy as a web or mobile application
 Syed Sameeda Thabasum
 B.Tech CSE 
 
-Shaik Mahammad Iliyaz
-B.Tech CSE | AI & Web Development Enthusiast
+
