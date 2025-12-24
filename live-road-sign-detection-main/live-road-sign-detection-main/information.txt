@@ -1,0 +1,156 @@
+2. Boosting:
+Boosting trains models sequentially, where each new model focuses on correcting the errors of the previous one. It assigns higher weights to misclassified instances. This reduces bias and improves model accuracy. Example: AdaBoost, Gradient Boosting.
+
+Sequential Learning: Models are trained one after another, not in parallel.
+
+Error Focused: Each new model corrects the mistakes of the previous ones.
+
+Weighted Instances: Misclassified data points are given more weight in the next round.
+
+Reduces Bias: Boosting mainly reduces bias and can improve weak learners significantly.
+
+Risk of Overfitting: May overfit if not properly regularized or if too many models are added.
+
+Examples: Popular boosting algorithms include AdaBoost, Gradient Boosting, and XGBoost.
+
+
+. AdaBoost (Adaptive Boosting):
+AdaBoost combines several weak learners (usually decision stumps) into a strong learner by training them sequentially. Each new model focuses more on the misclassified data points by increasing their weights. Final predictions are made using a weighted vote of all models. It is sensitive to noise but works well with clean data.
+
+2. Gradient Boosting:
+Gradient Boosting also builds models sequentially, but it corrects errors by minimizing a loss function using gradient descent. Each new model learns the residual errors (difference between actual and predicted values) of the previous model. It's powerful and flexible, used in models like XGBoost and LightGBM.
+
+
+Stacking (Stacked Generalization)
+Stacking is an advanced ensemble learning technique that combines the predictions of multiple different models (base learners) using a meta-learner (also called a blender) to improve performance.
+
+🔹 How it Works:
+Base Learners (Level-0 Models):
+Multiple diverse models (e.g., decision tree, SVM, k-NN, logistic regression) are trained on the original training data. These can be heterogeneous (different types).
+
+Meta-Learner (Level-1 Model):
+A separate model is trained to learn from the predictions of the base models, not the original data. It figures out how to best combine them to make a final prediction.
+
+Training Strategy:
+Often uses cross-validation to prevent overfitting when generating base model predictions for the meta-learner.
+
+
+
+Bagging:       [Model1]   [Model2]   [Model3]
+               \     |     /         (Parallel)
+                \    |    /
+                [Majority Vote / Average]
+
+Boosting:  [Model1] → [Model2] → [Model3]
+             (Focus on errors of previous)
+                     (Sequential)
+                ↓
+           [Final Output]
+
+Stacking:
+       [Model1]   [Model2]   [Model3]   (Different types)
+             \       |       /
+              \      |      /
+               [Meta-Model Combines Predictions]
+
+
+
+
+
+Clustering
+Clustering is an unsupervised machine learning technique used to group similar data points into clusters based on their features. The main objective is to ensure that data points within the same cluster are more similar to each other than to those in other clusters.
+
+Types of Clustering
+There are several types of clustering algorithms. Two commonly used ones are:
+
+1. K-Means Clustering
+Definition: K-Means is a partition-based clustering algorithm that divides the dataset into k clusters, where k is a predefined number.
+
+How it works:
+
+Select k initial centroids randomly.
+
+Assign each data point to the nearest centroid.
+
+Recalculate the centroids as the mean of all points in each cluster.
+
+Repeat steps 2 and 3 until the centroids do not change significantly.
+
+Applications: Customer segmentation, image compression, pattern recognition.
+
+2. Hierarchical Clustering
+Hierarchical clustering builds a hierarchy of clusters either from the bottom-up (agglomerative) or top-down (divisive). There are two main approaches:
+
+a. AGNES (Agglomerative Nesting)
+Type: Bottom-up approach.
+
+How it works:
+
+Starts with each data point as a single cluster.
+
+At each step, the two closest clusters are merged.
+
+The process continues until all points are in a single cluster or a stopping condition is met.
+
+Output: A dendrogram (tree-like diagram) showing the merge steps.
+
+b. DIANA (Divisive Analysis)
+Type: Top-down approach.
+
+How it works:
+
+Starts with all data points in one large cluster.
+
+Recursively splits the cluster into smaller clusters.
+
+Splits continue until each data point is its own cluster or a desired number of clusters is reached.
+
+Output: Also produces a dendrogram but in the reverse order of AGNES.
+
+
+
+Example Problem (Solved in One Step)
+Given Points:
+(1, 2), (2, 1), (9, 8), (8, 9)
+Number of Clusters (k): 2
+
+Initial Centroids (chosen smartly):
+
+C1 = (1, 2)
+
+C2 = (9, 8)
+
+Step 1: Calculate Distance & Assign Clusters
+Point	Distance to C1 (1,2)	Distance to C2 (9,8)	    Assigned Cluster
+(1, 2)	0	             √[(9−1)² + (8−2)²] = √100 = 10	C1
+(2, 1)	√[(1−2)² + (2−1)²] = √2 ≈ 1.41	√[(9−2)² + (8−1)²] = √98 ≈ 9.9	C1
+(9, 8)	√[(1−9)² + (2−8)²] = 10	0	C2
+(8, 9)	√[(1−8)² + (2−9)²] = √98 ≈ 9.9	√[(9−8)² + (8−9)²] = √2 ≈ 1.41	C2
+
+Cluster Assignment After Step 1:
+Cluster 1 (C1): (1, 2), (2, 1)
+
+Cluster 2 (C2): (9, 8), (8, 9)
+
+Step 2: Recalculate Centroids
+New C1 = Average of (1,2) and (2,1) = ((1+2)/2, (2+1)/2) = (1.5, 1.5)
+
+New C2 = Average of (9,8) and (8,9) = ((9+8)/2, (8+9)/2) = (8.5, 8.5)
+
+Step 3: Check for Convergence
+Now let's check the distance of each point to the new centroids (C1 = 1.5,1.5 and C2 = 8.5,8.5):
+
+(1,2) → C1 = √0.5 ≈ 0.71; C2 = much larger → stays in C1
+
+(2,1) → C1 = √0.5 ≈ 0.71; C2 = much larger → stays in C1
+
+(9,8) → C2 = √0.5 ≈ 0.71; C1 = much larger → stays in C2
+
+(8,9) → C2 = √0.5 ≈ 0.71; C1 = much larger → stays in C2
+
+✅ Assignments do not change. Algorithm has converged.
+
+
+
+
+
